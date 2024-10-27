@@ -1,0 +1,35 @@
+{
+    "scopeName": "source.bennugd2",
+    "patterns": [
+        {
+            "name": "keyword.control.bennugd2",
+            "match": "\\b(if|else|while|for|end|return|begin|loop|BEGIN|LOOP|END|import|IMPORT|IF|ELSE|WHILE|FOR|RETURN)\\b"
+        },
+        {
+            "name": "keyword.operator.bennugd2",
+            "match": "\\b(and|or|not)\\b"
+        },
+        {
+            "name": "storage.type.bennugd2",
+            "match": "\\b(int|float|string|array|struct|local|global|const|CONST|GLOBAL|STRING|INT|FLOAT|WORD|BYTE|byte|word|STRUCT)\\b"
+        },
+        {
+            "name": "constant.language.bennugd2",
+            "match": "\\b(true|false|null)\\b"
+        },
+        {
+            "name": "variable.language.bennugd2",
+            "match": "\\b(self|other|all|none)\\b"
+        },
+        {
+            "name": "comment.line.double-slash.bennugd2",
+            "begin": "//",
+            "end": "$"
+        },
+        {
+            "name": "entity.name.function.bennugd2",
+            "match": "\\b(sound_load|music_load|fpg_load|fpg_unload|music_unload|sound_unload|set_mode|put|key_down|key_up|key_right|key_left|clamp|wrap|file|file_exists|fopen|fread|fwrite|fseek|fclose|fgets|fputs)\\s*\\(.*?\\)"
+        }
+        
+    ]
+}
