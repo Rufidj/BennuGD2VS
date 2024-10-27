@@ -1,113 +1,110 @@
 const vscode = require('vscode');
-const { execSync } = require('child_process');
-const fs = require('fs');
-
-// Cargar funciones y parámetros desde el archivo JSON
-const functions = JSON.parse(fs.readFileSync('./functions.json', 'utf8'));
-
-function getBennuExecutables() {
-    // Obtener el PATH del sistema
-    const pathEnv = process.env.PATH.split(';'); // Para Windows, usa ';' como separador
-    const executables = {
-        compiler: null,
-        interpreter: null
-    };
-
-    // Buscar en cada ruta si existe el compilador y el intérprete
-    for (const path of pathEnv) {
-        const compilerPath = `${path}/bgdc`; // Cambia a bgdc.exe en Windows
-        const interpreterPath = `${path}/bgdi`; // Cambia a bgdi.exe en Windows
-
-        // Comprobar si el compilador existe
-        if (!executables.compiler) {
-            try {
-                execSync(`command -v bgdc`, { stdio: 'ignore' });
-                executables.compiler = compilerPath;
-            } catch (e) {
-                // Ignorar error si no se encuentra
-            }
-        }
-
-        // Comprobar si el intérprete existe
-        if (!executables.interpreter) {
-            try {
-                execSync(`command -v bgdi`, { stdio: 'ignore' });
-                executables.interpreter = interpreterPath;
-            } catch (e) {
-                // Ignorar error si no se encuentra
-            }
-        }
-
-        // Salir si ambos se encontraron
-        if (executables.compiler && executables.interpreter) {
-            break;
-        }
-    }
-
-    return executables;
-}
-
-function provideFunctionParameters(document, position) {
-    const lineText = document.lineAt(position).text;
-    const wordRange = document.getWordRangeAtPosition(position);
-    const functionName = document.getText(wordRange).trim();
-
-    const completionItems = [];
-
-    // Comprobar si la función está definida en functions.json
-    if (functions[functionName]) {
-        functions[functionName].parameters.forEach(param => {
-            const item = new vscode.CompletionItem(param, vscode.CompletionItemKind.Parameter);
-            item.documentation = `Parámetro: ${param}`; // Agregar documentación opcional
-            completionItems.push(item);
-        });
-    }
-
-    return completionItems;
-}
-
-function compile() {
-    const { compiler } = getBennuExecutables();
-
-    if (!compiler) {
-        vscode.window.showErrorMessage("No se encontró el compilador (bgdc) en el PATH.");
-        return;
-    }
-
-    // Aquí puedes implementar la lógica para compilar
-    vscode.window.showInformationMessage(`Compilando con ${compiler}...`);
-}
-
-function run() {
-    const { interpreter } = getBennuExecutables();
-
-    if (!interpreter) {
-        vscode.window.showErrorMessage("No se encontró el intérprete (bgdi) en el PATH.");
-        return;
-    }
-
-    // Aquí puedes implementar la lógica para ejecutar
-    vscode.window.showInformationMessage(`Ejecutando con ${interpreter}...`);
-}
+const { exec } = require('child_process');
+const path = require('path');
+const which = require('which');
 
 function activate(context) {
-    const { compiler, interpreter } = getBennuExecutables();
-    if (!compiler || !interpreter) {
-        vscode.window.showErrorMessage("No se encontraron bgdc o bgdi en el PATH.");
-        return;
+    // Crear una terminal para el compilador e intérprete
+    const terminal = vscode.window.createTerminal('BennuGD2 Terminal');
+
+    let compileCommand = vscode.commands.registerCommand('bennugd2.compile', function () {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            const filePath = editor.document.fileName;
+            const compilerPath = getExecutablePath('bgdc');
+            if (!compilerPath) {
+                vscode.window.showErrorMessage('Compilador (bgdc) no encontrado en el PATH.');
+                return;
+            }
+            terminal.sendText(`${compilerPath} "${filePath}"`);
+            terminal.show();
+        } else {
+            vscode.window.showErrorMessage('No hay un archivo abierto para compilar.');
+        }
+    });
+
+    let runCommand = vscode.commands.registerCommand('bennugd2.run', function () {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            const filePath = editor.document.fileName.replace('.prg', '.exe'); // Cambia esto según tu lógica
+            const interpreterPath = getExecutablePath('bgdi');
+            if (!interpreterPath) {
+                vscode.window.showErrorMessage('Intérprete (bgdi) no encontrado en el PATH.');
+                return;
+            }
+            terminal.sendText(`${interpreterPath} "${filePath}"`);
+            terminal.show();
+        } else {
+            vscode.window.showErrorMessage('No hay un archivo abierto para ejecutar.');
+        }
+    });
+
+    context.subscriptions.push(compileCommand);
+    context.subscriptions.push(runCommand);
+
+    // Configuración para el autocompletado
+    const provider = vscode.languages.registerCompletionItemProvider('bennugd2', {
+        provideCompletionItems(document, position) {
+            const completionItems = [];
+            const functions = [
+                { label: 'sound_load', parameters: ['STRING Song'] },
+                { label: 'music_load', parameters: ['STRING Music'] },
+                { label: 'music_unload', parameters: ['INT Music'] },
+                { label: 'sound_unload', parameters: ['INT Song'] },
+                { label: 'fpg_load', parameters: ['STRING FPG'] },
+                { label: 'fpg_unload', parameters: ['INT FPG'] },
+                { label: 'set_mode', parameters: ['INT WIDTH, INT HEIGHT'] },
+                { label: 'fopen', parameters: ['STRING File,INT Mode'] },
+                { label: 'fread', parameters: ['STRING File, INT Variable'] },
+                { label: 'fwrite', parameters: ['STRING File, INT Variable'] },
+                { label: 'fclose', parameters: ['INT IDFile'] },
+                { label: 'fseek', parameters: ['INT IDFile, INT Position, INT From '] },
+                { label: 'ftell', parameters: ['INT IDFile'] },
+                { label: 'flength', parameters: ['INT IDFile'] },
+                { label: 'feof', parameters: ['INT IDFile'] },
+                { label: 'map_load', parameters: ['STRING Map'] },
+                { label: 'map_upload', parameters: ['INT Map'] },
+                { label: 'wrap', parameters: ['INT Value, INT Min, INT Max'] },
+                { label: 'clamp', parameters: ['INT Value, INT Min, INT Max'] },
+                { label: 'music_play', parameters: ['INT IDMusic, INT Loops'] },
+                { label: 'music_stop', parameters: [] },
+                { label: 'sound_play', parameters: ['INT IDSound, INT Loops'] },
+                { label: 'sound_stop', parameters: ['INT IDSound'] },
+                { label: 'set_fps', parameters: ['INT FPS, INT JUMP'] },
+                { label: 'map_get_pixel', parameters: ['INT File, INT Graph, INT X, INT Y'] },
+                { label: 'write_in_map', parameters: ['INT Font, INT Variable, INT Alignment'] },
+                { label: 'map_info', parameters: ['INT File, INT Graph, INT Type'] },
+                { label: 'map_new', parameters: ['INT WIDTH, INT HEIGHT'] },
+                { label: 'write', parameters: ['INT Font, INT X, INT Y, INT Alignment, STRING Text'] },
+                { label: 'write_var', parameters: ['INT Font, INT X, INT Y, INT Alignment, VARIABLE'] },
+                { label: 'fade_on', parameters: ['INT IN, INT OUT'] },
+            ];
+
+            functions.forEach(func => {
+                const item = new vscode.CompletionItem(func.label, vscode.CompletionItemKind.Function);
+                item.detail = `Función: ${func.label}(${func.parameters.join(', ')})`;
+                item.insertText = new vscode.SnippetString(`${func.label}($0)`);
+                completionItems.push(item);
+            });
+
+            return completionItems;
+        }
+    });
+
+    context.subscriptions.push(provider);
+}
+
+function deactivate() {}
+
+function getExecutablePath(executable) {
+    try {
+        return which.sync(executable);
+    } catch (err) {
+        return null;
     }
-
-    console.log(`Compilador encontrado en: ${compiler}`);
-    console.log(`Intérprete encontrado en: ${interpreter}`);
-
-    context.subscriptions.push(vscode.languages.registerCompletionItemProvider('bennugd2', {
-        provideCompletionItems
-    }));
-
-    context.subscriptions.push(vscode.commands.registerCommand('bennugd2.compile', compile));
-    context.subscriptions.push(vscode.commands.registerCommand('bennugd2.run', run));
 }
 
 module.exports = {
-    activate
+    activate,
+    deactivate
 };

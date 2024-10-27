@@ -1,25 +1,164 @@
 {
-    "sound_load": {
-        "parameters": ["STRING Song"]
-    },
-    "music_load": {
-        "parameters": ["STRING Music"]
-    },
-    "music_unload": {
-        "parameters": ["INT Music"]
-    },
-    "sound_unload": {
-        "parameters": ["INT Song"]
-    },
-    "fpg_load": {
-        "parameters": ["STRING FPG"]
-    },
-    "fpg_unload": {
-        "parameters": ["INT FPG"]
-    },
-    "set_mode": {
-        "parameters": ["INT WIDTH, INT HEIGHT"]
-}
-
-
+    "functions": [
+        {
+            "label": "sound_load",
+            "parameters": ["STRING Song"]
+        },
+        {
+            "label": "music_load",
+            "parameters": ["STRING Music"]
+        },
+        {
+            "label": "music_unload",
+            "parameters": ["INT Music"]
+        },
+        {
+            "label": "sound_unload",
+            "parameters": ["INT Song"]
+        },
+        {
+            "label": "fpg_load",
+            "parameters": ["STRING FPG"]
+        },
+        {
+            "label": "fpg_unload",
+            "parameters": ["INT FPG"]
+        },
+        {
+            "label": "set_mode",
+            "parameters": ["INT WIDTH, INT HEIGHT"]
+        },
+        {
+            "label": "map_load",
+            "parameters": ["STRING Map"]
+        },
+        {
+            "label": "map_upload",
+            "parameters": ["INT Map"]
+        },
+        {
+            "label": "put",
+            "parameters": []
+        },
+        {
+            "label": "key_down",
+            "parameters": []
+        },
+        {
+            "label": "key_up",
+            "parameters": []
+        },
+        {
+            "label": "key_right",
+            "parameters": []
+        },
+        {
+            "label": "key_left",
+            "parameters": []
+        },
+        {
+            "label": "key",
+            "parameters": []
+        },
+        {
+            "label": "clamp",
+            "parameters": ["INT Value, INT Min, INT Max"]
+        },
+        {
+            "label": "wrap",
+            "parameters": ["INT Value, INT Min, INT Max"]
+        },
+        {
+            "label": "file",
+            "parameters": []
+        },
+        {
+            "label": "file_exists",
+            "parameters": ["STRING File"]
+        },
+        {
+            "label": "fopen",
+            "parameters": ["STRING File, INT Mode"]
+        },
+        {
+            "label": "fread",
+            "parameters": ["STRING File, INT Variable"]
+        },
+        {
+            "label": "fwrite",
+            "parameters": ["STRING File, INT Variable"]
+        },
+        {
+            "label": "fclose",
+            "parameters": ["INT IDFile"]
+        },
+        {
+            "label": "fseek",
+            "parameters": ["INT IDFile, INT Position, INT From"]
+        },
+        {
+            "label": "ftell",
+            "parameters": ["INT IDFile"]
+        },
+        {
+            "label": "flength",
+            "parameters": ["INT IDFile"]
+        },
+        {
+            "label": "feof",
+            "parameters": ["INT IDFile"]
+        },
+        {
+            "label": "write_var",
+            "parameters": ["INT Font, INT X, INT Y, INT Alignment, VARIABLE"]
+        },
+        {
+            "label": "write",
+            "parameters": ["INT Font, INT X, INT Y, INT Alignment, STRING Text"]
+        },
+        {
+            "label": "fgets",
+            "parameters": ["INT IDFile"]
+        },
+        {
+            "label": "fputs",
+            "parameters": ["STRING String, INT IDFile"]
+        },
+        {
+            "label": "music_play",
+            "parameters": ["INT IDMusic, INT Loops"]
+        },
+        {
+            "label": "music_stop",
+            "parameters":[]
+        },
+        {
+            "label": "sound_play",
+            "parameters":["INT IDSound, INT Loops"]
+        },
+        {
+            "label": "sound_stop",
+            "parameters": ["INT IDSound"]
+        },
+        {
+            "label": "set_fps",
+            "parameters": ["INT FPS,INT JUMP"]
+        },
+        {
+            "label": "map_get_pixel",
+            "parameters": ["INT File, INT Graph, INT X, INT Y"]
+        },
+        {
+            "label": "write_in_map",
+            "parameters": ["INT Font, INT Variable, INT Alignment"]
+        },
+        {
+            "label": "map_new",
+            "parameters": ["INT WIDTH, INT HEIGHT"]
+        },
+        {
+            "label": "fade_on",
+            "parameters": ["INT IN, INT OUT"]
+        }
+    ]
 }

@@ -13,9 +13,8 @@ Esta es una extensión para BennuGD2 que proporciona resaltado de sintaxis y tar
 
 ## Uso
 
-- **Compilar BennuGD2**: `Ctrl+Alt+C`
-- **Ejecutar BennuGD2**: `Ctrl+Alt+E`
-- **Compilar y Ejecutar BennuGD2**: `Ctrl+Alt+R`
+- **Compilar BennuGD2**: `F10`
+- **Ejecutar BennuGD2**: `F11`
 
 ## Contribuciones
 
