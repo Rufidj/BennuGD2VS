@@ -1,0 +1,25 @@
+{
+    "sound_load": {
+        "parameters": ["STRING Song"]
+    },
+    "music_load": {
+        "parameters": ["STRING Music"]
+    },
+    "music_unload": {
+        "parameters": ["INT Music"]
+    },
+    "sound_unload": {
+        "parameters": ["INT Song"]
+    },
+    "fpg_load": {
+        "parameters": ["STRING FPG"]
+    },
+    "fpg_unload": {
+        "parameters": ["INT FPG"]
+    },
+    "set_mode": {
+        "parameters": ["INT WIDTH, INT HEIGHT"]
+}
+
+
+}

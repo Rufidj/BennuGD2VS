@@ -1,0 +1,41 @@
+{
+    "name": "bennugd2",
+    "displayName": "BennuGD2 Extension",
+    "description": "Extensión para soporte de BennuGD2.",
+    "version": "0.1.0",
+    "publisher": "Rufidj",  
+    "author": "Ruben Hernandez",                  
+    "contributes": {
+        "commands": [
+            {
+                "command": "bennugd2.compile",
+                "title": "Compilar"
+            },
+            {
+                "command": "bennugd2.run",
+                "title": "Ejecutar"
+            }
+        ],
+        "languages": [{
+            "id": "bennugd2",
+            "aliases": ["BennuGD2"],
+            "extensions": [".prg"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "bennugd2",
+            "scopeName": "source.bennugd2",
+            "path": "./syntaxes/bennugd2.tmLanguage.json"
+        }]
+    },
+    "main": "./extension.js",
+    "engines": {
+        "vscode": "^1.50.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Rufidj/BennuGD2VS.git",
+    "keywords": ["bennugd2", "extension", "vscode"],
+    "license": "MIT",
+    "icon": "media/Icon.ico" 
+}
