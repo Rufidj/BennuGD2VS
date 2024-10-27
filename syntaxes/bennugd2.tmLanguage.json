@@ -3,7 +3,7 @@
     "patterns": [
         {
             "name": "keyword.control.bennugd2",
-            "match": "\\b(if|else|while|for|end|return|begin|loop|BEGIN|LOOP|END|import|IMPORT|IF|ELSE|WHILE|FOR|RETURN)\\b"
+            "match": "\\b(if|else|while|for|end|return|begin|loop|BEGIN|LOOP|END|import|IMPORT|IF|ELSE|WHILE|FOR|RETURN|global|GLOBAL)\\b"
         },
         {
             "name": "keyword.operator.bennugd2",
@@ -11,7 +11,7 @@
         },
         {
             "name": "storage.type.bennugd2",
-            "match": "\\b(int|float|string|array|struct|local|global|const|CONST|GLOBAL|STRING|INT|FLOAT|WORD|BYTE|byte|word|STRUCT)\\b"
+            "match": "\\b(int|float|string|array|struct|local|const|CONST|STRING|INT|FLOAT|WORD|BYTE|byte|word|STRUCT)\\b"
         },
         {
             "name": "constant.language.bennugd2",
@@ -19,7 +19,7 @@
         },
         {
             "name": "variable.language.bennugd2",
-            "match": "\\b(self|other|all|none)\\b"
+            "match": "\\b(graph|background|file|center|x|y|z|signal|continue|screen|fullscreen|process|PROCESS|ctype|c_scroll|priority|collision|flags|type)\\b"
         },
         {
             "name": "comment.line.double-slash.bennugd2",
@@ -28,8 +28,7 @@
         },
         {
             "name": "entity.name.function.bennugd2",
-            "match": "\\b(sound_load|music_load|fpg_load|fpg_unload|music_unload|sound_unload|set_mode|put|key_down|key_up|key_right|key_left|clamp|wrap|file|file_exists|fopen|fread|fwrite|fseek|fclose|fgets|fputs)\\s*\\(.*?\\)"
+            "match": "\\b(sound_load|music_load|music_play|music_stop|fpg_load|fpg_unload|map_load|map_upload|music_unload|sound_unload|set_mode|put|key_down|key_up|key_right|key_left|clamp|wrap|file|file_exists|fopen|fread|fwrite|fseek|fclose|fgets|fputs|ftell|flength|feof|write_var|write|set_fps|map_get_pixel|write_in_map|map_info|fade_on)\\s*\\(.*?\\)"
         }
-        
     ]
 }
