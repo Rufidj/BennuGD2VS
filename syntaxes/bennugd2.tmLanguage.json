@@ -3,7 +3,7 @@
     "patterns": [
         {
             "name": "keyword.control.bennugd2",
-            "match": "\\b(if|else|while|for|end|return|begin|loop|BEGIN|LOOP|END|import|IMPORT|IF|ELSE|WHILE|FOR|RETURN|global||private|PRIVATE)\\b"
+            "match": "\\b(if|else|while|for|end|return|begin|loop|BEGIN|LOOP|END|import|IMPORT|IF|ELSE|WHILE|FOR|RETURN|global|private|PRIVATE|frame|FRAME)\\b"
         },
         {
             "name": "keyword.operator.bennugd2",
