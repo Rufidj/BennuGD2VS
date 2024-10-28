@@ -17,5 +17,6 @@ Esta es una extensión para BennuGD2 que proporciona resaltado de sintaxis y tar
 - **Ejecutar BennuGD2**: `F11`
 
 ## Contribuciones
+SplinterGU - Por el desarrollo de BennuGD2 y su listado de funciones completo. 
 
 Sientete libre de contribuir al desarrollo de esta extensión.
