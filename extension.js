@@ -263,10 +263,10 @@ const functions = [
         "SCREEN width",
         "SCREEN height"
         ], },
-    { label: 'SET_MODE', parameters: ['INT WIDTH', 'INT HEIGHT', 'INT BITS'], return_type: 'INT', parameterDetails: [
+    { label: 'SET_MODE', parameters: ['INT WIDTH', 'INT HEIGHT', 'INT FLAG'], return_type: 'INT', parameterDetails: [
         "SCREEN width",
         "SCREEN height",
-        "COLOR Bits"
+        "MODE FLAG"
     ] },
     { label: 'SET_FPS', parameters: ['INT FPS', 'INT JUMP'], return_type: 'INT', parameterDetails: [
         "FRAMES Per Second",
@@ -320,12 +320,23 @@ const functions = [
         "TEXT POSITION Y"
     ] },
     { label: 'WRITE_MOVE', parameters: ['INT IDTEXT', 'INT X', 'INT Y', 'INT'], return_type: 'INT' },
-    { label: 'WRITE_DELETE', parameters: ['INT'], return_type: 'INT' },
-    { label: 'WRITE_IN_MAP', parameters: ['INT', 'STRING', 'INT'], return_type: 'INT' },
+    { label: 'WRITE_DELETE', parameters: ['INT IDTEXT'], return_type: 'INT', parameterDetails: [
+        "ID TEXT TO DELETE"
+    ] },
+    { label: 'WRITE_IN_MAP', parameters: ['INT FONT', 'STRING TEXT', 'INT ALINGN'], return_type: 'INT', parameterDetails: [
+        "ID FONT",
+        "TEXT TO WRITE",
+        "TEXT ALIGNMENT"
+    ] },
     { label: 'WRITE_IN_MAP', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'STRING', 'INT'], return_type: 'INT' },
     { label: 'TEXT_WIDTH', parameters: ['INT', 'STRING'], return_type: 'INT' },
     { label: 'TEXT_HEIGHT', parameters: ['INT', 'STRING'], return_type: 'INT' },
-    { label: 'WRITE_VAR', parameters: ['INT', 'INT', 'INT', 'INT', 'VARIABLE'], return_type: 'INT' },
+    { label: 'WRITE_VAR', parameters: ['INT FONT', 'INT X', 'INT Y ', 'INT ALINGN', 'VARIABLE'], return_type: 'INT', parameterDetails: [
+        "ID FONT",
+        "TEXT POSITION X",
+        "TEXT POSITION Y",
+        "TEXT ALIGNMENT"
+    ] },
     { label: 'WRITE_VAR', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'VARIABLE'], return_type: 'INT' },
     { label: 'WRITE_VALUE', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'POINTER'], return_type: 'INT' },
     { label: 'WRITE_VALUE', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'POINTER'], return_type: 'INT' },
@@ -336,37 +347,171 @@ const functions = [
     { label: 'MAP_BLOCK_COPY', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'BYTE', 'BYTE', 'BYTE', 'BYTE', 'INT'], return_type: 'INT' },
     { label: 'MAP_BLOCK_COPY', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'BYTE', 'BYTE', 'BYTE', 'BYTE', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'MAP_BLOCK_COPY', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_PUT', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_PUT', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'BYTE', 'BYTE', 'BYTE', 'BYTE'], return_type: 'INT' },
-    { label: 'MAP_PUT', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'BYTE', 'BYTE', 'BYTE', 'BYTE', 'INT'], return_type: 'INT' },
-    { label: 'MAP_PUT', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'BYTE', 'BYTE', 'BYTE', 'BYTE', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_NEW', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_NEW', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_CLEAR', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_CLEAR', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
+    { label: 'MAP_PUT', parameters: ['INT FILE', 'INT GRAPH DEST', 'INT FILE SRC', 'INT GRAPH SRC', 'INT X', 'INT Y'], return_type: 'INT', parameterDetails: [
+        "FILE",
+        "DESTINATION GRAPH",
+        "FILE SOURCE",
+        "SOURCE GRAPH",
+        "POSITION X",
+        "POSITION Y"
+    ] },
+    { label: 'MAP_PUT', parameters: ['INT FILE', 'INT GRAPH DEST', 'INT FILE SRC', 'INT GRAPH SRC', 'INT X', 'INT Y', 'INT ANGLE', 'INT SCALE_X', 'INT SCALE_Y', 'INT FLAGS', 'BYTE R', 'BYTE G', 'BYTE B', 'BYTE A'], return_type: 'INT', parameterDetails: [
+        "FILE",
+        "DESTINATION GRAPH",
+        "FILE SOURCE",
+        "SOURCE GRAPH",
+        "POSITION X",
+        "POSITION Y",
+        "GRAPH ANGLE",
+        "SCALE IN X",
+        "SCALE IN Y",
+        "GRAPH FLAGS",
+        "COLOR RED",
+        "COLOR GREEN",
+        "COLOR BLUE",
+        "ALPHA INTENSITY"
+    ] },
+    { label: 'MAP_PUT', parameters: ['INT FILE', 'INT GRAPH DEST', 'INT FILE SRC', 'INT GRAPH SRC', 'INT X', 'INT Y', 'INT ANGLE', 'INT SCALE_X', 'INT SCALE_Y', 'INT FLAGS', 'BYTE R', 'BYTE G', 'BYTE B', 'BYTE A', 'INT BLEND MODE'], return_type: 'INT',parameterDetails: [
+        "FILE",
+        "DESTINATION GRAPH",
+        "FILE SOURCE",
+        "SOURCE GRAPH",
+        "POSITION X",
+        "POSITION Y",
+        "GRAPH ANGLE",
+        "SCALE IN X",
+        "SCALE IN Y",
+        "GRAPH FLAGS",
+        "COLOR RED",
+        "COLOR GREEN",
+        "COLOR BLUE",
+        "ALPHA INTENSITY",
+        "BLEND MODE"
+    ] },
+    { label: 'MAP_PUT', parameters: ['INT FILE", "INT GRAPH_DEST","INT FILE_SRC","INT GRAPH_SRC","INT X","INT Y","INT ANGLE","INT SCALE_X","INT SCALEY","INT FLAGS","BYTE R","BYTE G","BYTE B","BYTE A","INT BLEND_MODE","INT SRC_RGB","INT DST_RGB","INT SRC_ALPHA","INT DST_ALPHA","INT EQUATION_RGB","INT EQUATION_ALPHA"'], return_type: 'INT', parameterDetails: [
+        "FILE",
+        "DESTINATION GRAPH",
+        "FILE SOURCE",
+        "SOURCE GRAPH",
+        "POSITION X",
+        "POSITION Y",
+        "GRAPH ANGLE",
+        "SCALE IN X",
+        "SCALE IN Y",
+        "GRAPH FLAGS",
+        "COLOR RED",
+        "COLOR GREEN",
+        "COLOR BLUE",
+        "ALPHA INTENSITY",
+        "BLEND MODE",
+        "SOURCE RGB",
+        "DESTINATION RGB",
+        "SOURCE ALPHA",
+        "DESTINATION ALPHA",
+        "EQUATION RGB",
+        "EQUATION ALPHA"
+    ] },
+    { label: 'MAP_NEW', parameters: ['INT WIDTH', 'INT HEIGHT'], return_type: 'INT',parameterDetails: [
+        "MAP WIDTH",
+        "MAP HEIGHT"
+    ] },
+    { label: 'MAP_NEW', parameters: ['INT WIDTH', 'INT HEIGHT', 'INT DEEP'], return_type: 'INT',parameterDetails: [
+        "MAP WIDTH",
+        "MAP HEIGHT",
+        "MAP DEEP"
+    ] },
+    { label: 'MAP_CLEAR', parameters: ['INT FILE', 'INT GRAPH'], return_type: 'INT',parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH"
+    ] },
+    { label: 'MAP_CLEAR', parameters: ['INT FILE', 'INT GRAPH', 'INT COLOR'], return_type: 'INT', parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "COLOR NUMBER"
+    ] },
     { label: 'MAP_CLEAR', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'MAP_CLEAR', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'MAP_CLONE', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_NAME', parameters: ['INT', 'INT'], return_type: 'STRING' },
-    { label: 'MAP_SET_NAME', parameters: ['INT', 'INT', 'STRING'], return_type: 'INT' },
-    { label: 'MAP_EXISTS', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_DEL', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_UNLOAD', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_LOAD', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'MAP_LOAD', parameters: ['STRING', 'POINTER'], return_type: 'INT' },
-    { label: 'MAP_SAVE', parameters: ['INT', 'INT', 'STRING'], return_type: 'INT' },
-    { label: 'MAP_GET_PIXEL', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_PUT_PIXEL', parameters: ['INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'FPG_ADD', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
+    { label: 'MAP_NAME', parameters: ['INT FILE', 'INT GRAPH'], return_type: 'STRING',parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER"
+    ] },
+    { label: 'MAP_SET_NAME', parameters: ['INT FILE', 'INT GRAPH', 'STRING NAME'], return_type: 'INT',parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "MAP NAME"
+    ] },
+    { label: 'MAP_EXISTS', parameters: ['INT FILE', 'INT GRAPH'], return_type: 'INT',parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER"
+    ] },
+    { label: 'MAP_DEL', parameters: ['INT FILE', 'INT GRAPH'], return_type: 'INT', parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER"
+    ] },
+    { label: 'MAP_UNLOAD', parameters: ['INT FILE', 'INT GRAPH'], return_type: 'INT', parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER"
+    ] },
+    { label: 'MAP_LOAD', parameters: ['STRING FILE'], return_type: 'INT', parameterDetails: [
+        "GRAPHIC FILE"
+    ] },
+    { label: 'MAP_LOAD', parameters: ['STRING FILE', 'POINTER'], return_type: 'INT' },
+    { label: 'MAP_SAVE', parameters: ['INT FILE', 'INT GRAPH', 'STRING FILESAVE'], return_type: 'INT', parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "GRAPH TO SAVE"
+    ] },
+    { label: 'MAP_GET_PIXEL', parameters: ['INT FILE', 'INT GRAPH', 'INT X', 'INT Y'], return_type: 'INT', parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "POSITION X",
+        "POSITION Y"
+    ] },
+    { label: 'MAP_PUT_PIXEL', parameters: ['INT FILE', 'INT GRAPH', 'INT X', 'INT Y', 'INT COLOR'], return_type: 'INT', parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "POSITION X",
+        "POSTION Y",
+        "COLOR NUMBER"
+    ] },
+    { label: 'FPG_ADD', parameters: ['INT FILE', 'INT GRAPH', 'INT FILE SRC', 'INT GRAPH SRC'], return_type: 'INT', parameterDetails: [
+        "GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "LIBRARY SOURCE",
+        "GRAPH SOURCE"
+    ] },
     { label: 'FPG_NEW', parameters: [], return_type: 'INT' },
-    { label: 'FPG_EXISTS', parameters: ['INT'], return_type: 'INT' },
-    { label: 'FPG_LOAD', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'FPG_LOAD', parameters: ['STRING', 'POINTER'], return_type: 'INT' },
-    { label: 'FPG_DEL', parameters: ['INT'], return_type: 'INT' },
-    { label: 'FPG_UNLOAD', parameters: ['INT'], return_type: 'INT' },
-    { label: 'MAP_INFO_SET', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_INFO', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'MAP_INFO', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
+    { label: 'FPG_EXISTS', parameters: ['INT FILE'], return_type: 'INT',parameterDetails: [
+        "FILE EXISTS"
+    ] },
+    { label: 'FPG_LOAD', parameters: ['STRING FILE'], return_type: 'INT',parameterDetails: [
+        "FPG FILE"
+    ] },
+    { label: 'FPG_LOAD', parameters: ['STRING FILE', 'POINTER'], return_type: 'INT' },
+    { label: 'FPG_DEL', parameters: ['INT FILE'], return_type: 'INT', parameterDetails: [
+        "ID FPG FILE"
+    ] },
+    { label: 'FPG_UNLOAD', parameters: ['INT FILE'], return_type: 'INT', parameterDetails: [
+        "ID FPG FILE"
+    ] },
+    { label: 'MAP_INFO_SET', parameters: ['INT FILE', 'INT GRAPH', 'INT TYPE', 'INT'], return_type: 'INT', parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "TYPE INFO",
+        "??"
+    ] },
+    { label: 'MAP_INFO', parameters: ['INT FILE', 'INT GRAPH', 'INT TYPE', 'INT'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "TYPE INFO",
+        "??"
+    ] },
+    { label: 'MAP_INFO', parameters: ['INT FILE', 'INT GRAPH', 'INT TYPE'], return_type: 'INT', parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH NUMBER",
+        "TYPE INFO"
+    ] },
     { label: 'GRAPHIC_SET', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'GRAPHIC_INFO', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'POINT_GET', parameters: ['INT', 'INT', 'INT', 'POINTER', 'POINTER'], return_type: 'INT' },
