@@ -13,39 +13,109 @@ let diagnostics = vscode.languages.createDiagnosticCollection("bennugd2");
 // Lista de funciones para autocompletado y ayuda de firma
 const functions = [
     { label: 'CD', parameters: [], return_type: 'STRING' },
-    { label: 'CD', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'CHDIR', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'MKDIR', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'RMDIR', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'GLOB', parameters: ['STRING'], return_type: 'STRING' },
-    { label: 'RM', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'DIROPEN', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'DIRCLOSE', parameters: ['INT'], return_type: 'INT' },
-    { label: 'DIRREAD', parameters: ['INT'], return_type: 'STRING' },
+    { label: 'CD', parameters: ['STRING DIR'], return_type: 'INT',parameterDetails: [
+        "DIRECTORY NAME"
+    ] },
+    { label: 'CHDIR', parameters: ['STRING DIR'], return_type: 'INT',parameterDetails: [
+        "DIRECTORY NAME"
+    ] },
+    { label: 'MKDIR', parameters: ['STRING DIR'], return_type: 'INT',parameterDetails: [
+        "DIRECTORY NAME"
+    ] },
+    { label: 'RMDIR', parameters: ['STRING DIR'], return_type: 'INT',parameterDetails: [
+        "DIRECTORY NAME"
+    ] },
+    { label: 'GLOB', parameters: ['STRING PATTERN'], return_type: 'STRING',parameterDetails: [
+        "PATTERN SEARCH"
+    ] },
+    { label: 'RM', parameters: ['STRING FILE'], return_type: 'INT',parameterDetails: [
+        "FILE TO DELETE"
+    ] },
+    { label: 'DIROPEN', parameters: ['STRING DIR'], return_type: 'INT',parameterDetails: [
+        "DIRECTORY TO OPEN"
+    ] },
+    { label: 'DIRCLOSE', parameters: ['INT IDDIR'], return_type: 'INT',parameterDetails: [
+        "ID DIRECTORY TO CLOSE"
+    ] },
+    { label: 'DIRREAD', parameters: ['INT IDDIR'], return_type: 'STRING',parameterDetails: [
+        "ID DIRECTORY TO READ"
+    ] },
     { label: 'GET_BASE_PATH', parameters: [], return_type: 'STRING' },
-    { label: 'GET_PREF_PATH', parameters: ['STRING', 'STRING'], return_type: 'STRING' },
-    { label: 'SAVE', parameters: ['STRING', 'VARIABLE'], return_type: 'INT' },
-    { label: 'LOAD', parameters: ['STRING', 'VARIABLE'], return_type: 'INT' },
-    { label: 'FILE', parameters: ['STRING'], return_type: 'STRING' },
-    { label: 'FOPEN', parameters: ['STRING File', 'INT Mode'], return_type: 'INT' },
-    { label: 'FCLOSE', parameters: ['INT File'], return_type: 'INT' },
-    { label: 'FREAD', parameters: ['INT File', 'VARIABLE'], return_type: 'INT' },
+    { label: 'GET_PREF_PATH', parameters: ['STRING ORG', 'STRING APP'], return_type: 'STRING',parameterDetails: [
+        "ORGANIZATION",
+        "APP NAME"
+    ] },
+    { label: 'SAVE', parameters: ['STRING FILE', 'VARIABLE'], return_type: 'INT',parameterDetails: [
+        "FILENAME TO SAVE",
+        "VARIABLE TO SAVE"
+    ] },
+    { label: 'LOAD', parameters: ['STRING FILE', 'VARIABLE'], return_type: 'INT',parameterDetails: [
+        "FILENAME TO LOAD",
+        "VARIABLE TO LOAD"
+    ] },
+    { label: 'FILE', parameters: ['STRING FILE'], return_type: 'STRING' },
+    { label: 'FOPEN', parameters: ['STRING FILE', 'INT MODE'], return_type: 'INT',parameterDetails: [
+        "FILE TO OPEN",
+        "MODE"
+    ] },
+    { label: 'FCLOSE', parameters: ['INT FILE'], return_type: 'INT',parameterDetails: [
+        "ID FILE TO CLOSE"
+    ] },
+    { label: 'FREAD', parameters: ['INT FILE', 'VARIABLE'], return_type: 'INT',parameterDetails: [
+        "ID FILE TO READ",
+        "VARIABLE TO READ"
+    ] },
     { label: 'FREAD', parameters: ['POINTER', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'FWRITE', parameters: ['INT File', 'VARIABLE'], return_type: 'INT' },
+    { label: 'FWRITE', parameters: ['INT FILE', 'VARIABLE'], return_type: 'INT',parameterDetails: [
+        "ID FILE TO WRITE",
+        "VARIABLE TO WRITE"
+    ] },
     { label: 'FWRITE', parameters: ['POINTER', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'FSEEK', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'FREWIND', parameters: ['INT'], return_type: 'UNDEFINED' },
-    { label: 'FTELL', parameters: ['INT'], return_type: 'INT' },
-    { label: 'FFLUSH', parameters: ['INT'], return_type: 'INT' },
-    { label: 'FPUTS', parameters: ['INT', 'STRING'], return_type: 'INT' },
-    { label: 'FGETS', parameters: ['INT File'], return_type: 'STRING' },
-    { label: 'FEOF', parameters: ['INT File'], return_type: 'INT' },
-    { label: 'FLENGTH', parameters: ['INT File'], return_type: 'INT' },
-    { label: 'FEXISTS', parameters: ['STRING File'], return_type: 'INT' },
-    { label: 'FREMOVE', parameters: ['STRING File'], return_type: 'INT' },
-    { label: 'FMOVE', parameters: ['STRING', 'STRING'], return_type: 'INT' },
-    { label: 'MAX', parameters: ['DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'MIN', parameters: ['DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
+    { label: 'FSEEK', parameters: ['INT FILE', 'INT OFFSET', 'INT ORIGIN'], return_type: 'INT',parameterDetails: [
+        "ID FILE",
+        "OFFSET IN BYTES",
+        "ORIGINAL POSITION"
+    ] },
+    { label: 'FREWIND', parameters: ['INT FILE'], return_type: 'UNDEFINED',parameterDetails: [
+        "ID FILE TO REWIND"
+    ] },
+    { label: 'FTELL', parameters: ['INT FILE'], return_type: 'INT',parameterDetails: [
+        "ID FILE"
+    ] },
+    { label: 'FFLUSH', parameters: ['INT FILE'], return_type: 'INT',parameterDetails: [
+        "ID FILE"
+    ] },
+    { label: 'FPUTS', parameters: ['IN FILE', 'STRING TEXT'], return_type: 'INT',parameterDetails: [
+        "ID FILE TO PUT",
+        "TEXT TO PUT"
+    ] },
+    { label: 'FGETS', parameters: ['INT FILE'], return_type: 'STRING',parameterDetails: [
+        "ID FILE TO GET"
+    ] },
+    { label: 'FEOF', parameters: ['INT FILE'], return_type: 'INT',parameterDetails: [
+        "ID FILE"
+    ] },
+    { label: 'FLENGTH', parameters: ['INT FILE'], return_type: 'INT',parameterDetails: [
+        "ID FILE"
+    ] },
+    { label: 'FEXISTS', parameters: ['STRING FILE'], return_type: 'INT',parameterDetails: [
+        "FILE TO SEE IF IT EXISTS"
+    ] },
+    { label: 'FREMOVE', parameters: ['STRING FILE'], return_type: 'INT',parameterDetails: [
+        "FILE TO REMOVE"
+    ] },
+    { label: 'FMOVE', parameters: ['STRING FILE SRC', 'STRING FILE DEST'], return_type: 'INT',parameterDetails: [
+        "FILE ORIGINAL SOURCE",
+        "FILE DESTINATION"
+    ] },
+    { label: 'MAX', parameters: ['DOUBLE VALUE1', 'DOUBLE VALUE2'], return_type: 'DOUBLE',parameterDetails: [
+        "VALUE NUMBER",
+        "VALUE NUMBER"
+    ] },
+    { label: 'MIN', parameters: ['DOUBLE VALUE1', 'DOUBLE VALUE2'], return_type: 'DOUBLE',parameterDetails: [
+        "VALUE NUMBER",
+        "VALUE NUMBER"
+    ] },
     { label: 'SGN', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
     { label: 'SGN', parameters: ['INT'], return_type: 'INT' },
     { label: 'ROUND', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
@@ -75,13 +145,74 @@ const functions = [
     { label: 'ISINF', parameters: ['DOUBLE'], return_type: 'INT' },
     { label: 'ISNAN', parameters: ['DOUBLE'], return_type: 'INT' },
     { label: 'FINITE', parameters: ['DOUBLE'], return_type: 'INT' },
-    { label: 'INTERSECT', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE X3', 'DOUBLE Y3', 'DOUBLE X4', 'DOUBLE Y4', 'POINTER', 'POINTER'], return_type: 'INT' },
-    { label: 'INTERSECT_LINE_CIRCLE', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE CX', 'DOUBLE CY', 'DOUBLE R', 'POINTER', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
-    { label: 'INTERSECT_CIRCLE', parameters: ['DOUBLE', 'DOUBLE', 'DOUBLE', 'DOUBLE', 'DOUBLE', 'DOUBLE', 'POINTER', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
-    { label: 'ORTHO', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE PX', 'DOUBLE PY', 'POINTER', 'POINTER'], return_type: 'DOUBLE' },
-    { label: 'PROJECT', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE PX', 'DOUBLE PY', 'POINTER', 'POINTER'], return_type: 'DOUBLE' },
-    { label: 'FGET_ANGLE', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2'], return_type: 'INT' },
-    { label: 'FGET_DIST', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2'], return_type: 'DOUBLE' },
+    { label: 'INTERSECT', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE X3', 'DOUBLE Y3', 'DOUBLE X4', 'DOUBLE Y4', 'POINTER', 'POINTER'], return_type: 'INT', parameterDetails: [
+        "POSITION X1",
+        "POSITION Y1",
+        "POSITION X2",
+        "POSITION Y2",
+        "POSITION X3",
+        "POSITION Y3",
+        "POSITION X4",
+        "POSITION POINTER X",
+        "POSITION POINTER Y"
+    ] },
+    { label: 'INTERSECT_LINE_CIRCLE', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE CX', 'DOUBLE CY', 'DOUBLE R', 'POINTER', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT',parameterDetails: [
+        "POSITION X1",
+        "POSITION Y1",
+        "POSITION X2",
+        "POSITION Y2",
+        "POSITION X3",
+        "POSITION Y3",
+        "POSITION X4",
+        "POSITION POINTER X",
+        "POSITION POINTER Y",
+        "POSITION POINTER X1",
+        "POSITION POINTER X2"
+    ] },
+    { label: 'INTERSECT_CIRCLE', parameters: ['DOUBLE CX1', 'DOUBLE CY1', 'DOUBLE CX2', 'DOUBLE CY2', 'DOUBLE R1', 'DOUBLE R2', 'POINTER X', 'POINTER Y', 'POINTER X1', 'POINTER Y2'], return_type: 'INT',parameterDetails: [
+        "POSITION CX1",
+        "POSITION CY1",
+        "POSITION CX2",
+        "POSITION CY2",
+        "POSITION R1",
+        "POSITION R2",
+        "POSITION POINTER X",
+        "POSITION POINTER Y",
+        "POSITION POINTER X1",
+        "POSITION POINTER Y2"
+    ] },
+    { label: 'ORTHO', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE PX', 'DOUBLE PY', 'POINTER X', 'POINTER Y'], return_type: 'DOUBLE',parameterDetails: [
+        "POSITION X1",
+        "POSITION Y1",
+        "POSITION X2",
+        "POSITION Y2",
+        "POSITION PX",
+        "POSITION PY",
+        "POSITION POINTER X",
+        "POSITION POINTER Y"
+    ] },
+    { label: 'PROJECT', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE PX', 'DOUBLE PY', 'POINTER X', 'POINTER Y'], return_type: 'DOUBLE',parameterDetails: [
+        "POSITION X1",
+        "POSITION Y1",
+        "POSITION X2",
+        "POSITION Y2",
+        "POSITION PX",
+        "POSITION PY",
+        "POSITION POINTER X",
+        "POSITION POINTER Y"
+    ] },
+    { label: 'FGET_ANGLE', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2'], return_type: 'INT',parameterDetails: [
+        "POSITION X1",
+        "POSITION Y1",
+        "POSITION X2",
+        "POSITION Y2"
+    ] },
+    { label: 'FGET_DIST', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2'], return_type: 'DOUBLE',parameterDetails: [
+        "POSITION X1",
+        "POSITION Y1",
+        "POSITION X2",
+        "POSITION Y2"
+    ] },
     { label: 'DISTANCE', parameters: ['DOUBLE', 'DOUBLE', 'DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
     { label: 'DIST', parameters: ['DOUBLE', 'DOUBLE', 'DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
     { label: 'NEAR_ANGLE', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
