@@ -767,27 +767,80 @@ const functions = [
     { label: 'JOY_GETACCEL', parameters: ['INT', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
     { label: 'JOY_IS_ATTACHED', parameters: [], return_type: 'INT' },
     { label: 'JOY_IS_ATTACHED', parameters: ['INT'], return_type: 'INT' },
-    { label: 'JOY_QUERY', parameters: ['INT'], return_type: 'INT' },
-    { label: 'JOY_QUERY', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'JOY_QUERY', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'JOY_SET', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
+    { label: 'JOY_QUERY', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "JOY SELECTED"
+    ] },
+    { label: 'JOY_QUERY', parameters: ['INT JOY', 'INT ELEMENT'], return_type: 'INT',parameterDetails: [
+        "JOY SELECTED",
+        "ELEMENT"
+    ] },
+    { label: 'JOY_QUERY', parameters: ['INT JOY', 'INT ELEMENT', 'INT ARG1'], return_type: 'INT', parameterDetails: [
+        "JOY SELECTED",
+        "ELEMENT",
+        "ARGUMENT"
+    ] },
+    { label: 'JOY_SET', parameters: ['INT JOY', 'INT ELEMENT', 'INT ARG1', 'INT ARG2'], return_type: 'INT',parameterDetails: [
+        "JOY SELECTED",
+        "ELEMENT"
+    ] },
     { label: 'JOY_SET', parameters: ['INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'NUMBER_JOY', parameters: [], return_type: 'INT' },
-    { label: 'SELECT_JOY', parameters: ['INT'], return_type: 'INT' },
-    { label: 'GET_JOY_BUTTON', parameters: ['INT'], return_type: 'INT' },
-    { label: 'GET_JOY_BUTTON', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'GET_JOY_POSITION', parameters: ['INT'], return_type: 'INT' },
-    { label: 'GET_JOY_POSITION', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'NET_OPEN', parameters: ['INT', 'INT', 'STRING', 'INT'], return_type: 'POINTER' },
-    { label: 'NET_WAIT', parameters: ['POINTER', 'INT', 'POINTER'], return_type: 'INT' },
-    { label: 'NET_SEND', parameters: ['POINTER', 'POINTER', 'INT'], return_type: 'INT' },
-    { label: 'NET_RECV', parameters: ['POINTER', 'POINTER', 'INT'], return_type: 'INT' },
-    { label: 'NET_CLOSE', parameters: ['POINTER'], return_type: 'INT' },
-    { label: 'NET_GETAVAILABLEBYTES', parameters: ['POINTER'], return_type: 'INT' },
-    { label: 'NET_GETRECEIVEBUFFERSIZE', parameters: ['POINTER'], return_type: 'INT' },
-    { label: 'NET_GETREMOTEADDR', parameters: ['POINTER'], return_type: 'STRING' },
-    { label: 'NET_IS_NEW_CONNECTION', parameters: ['POINTER'], return_type: 'INT' },
-    { label: 'NET_IS_MESSAGE_INCOMING', parameters: ['POINTER'], return_type: 'INT' },
+    { label: 'SELECT_JOY', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "JOY SELECTED"
+    ] },
+    { label: 'GET_JOY_BUTTON', parameters: ['INT BUTTON'], return_type: 'INT',parameterDetails: [
+        "BUTTON PRESSED"
+    ] },
+    { label: 'GET_JOY_BUTTON', parameters: ['INT JOYSTICK', 'INT BUTTON'], return_type: 'INT',parameterDetails: [
+        "JOYSTICK",
+        "BUTTON PRESSED"
+    ] },
+    { label: 'GET_JOY_POSITION', parameters: ['INT AXIS'], return_type: 'INT',parameterDetails: [
+        "JOYSTICK DIRECTION (0/1)"
+    ] },
+    { label: 'GET_JOY_POSITION', parameters: ['INT JOYSTICK', 'INT AXIS'], return_type: 'INT',parameterDetails: [
+        "JOYSTICK",
+        "JOYSTICK DIRECTION (0/1)"
+    ] },
+    { label: 'NET_OPEN', parameters: ['INT MODE', 'INT PROTO', 'STRING ADDR', 'INT PORT'], return_type: 'POINTER',parameterDetails: [
+        "NETWORK MODE (SERVER/CLIENT)",
+        "NETWORK PROTOCOL (TCP/UDP)",
+        "ADDRESS TO CONNECT (OPTIONAL)",
+        "PORT TO CONNECT"
+    ] },
+    { label: 'NET_WAIT', parameters: ['POINTER SOCK', 'INT TIMEOUT', 'POINTER EVENTS'], return_type: 'INT',parameterDetails: [
+        "LISTS OF SOCKETS TO WAIT ON",
+        "TIMEOUT OF MILISECONS",
+        "LISTS OF EVENTS"
+    ] },
+    { label: 'NET_SEND', parameters: ['POINTER NETH', 'POINTER BUF', 'INT LEN'], return_type: 'INT',parameterDetails: [
+        "POINTER TO THE NETWORK CONNECTION",
+        "BUFFER TO STORE RECEIVED DATA",
+        "LENGTH OF THE BUFFER"
+    ] },
+    { label: 'NET_RECV', parameters: ['POINTER NETH', 'POINTER BUF', 'INT LEN'], return_type: 'INT',parameterDetails: [
+        "POINTER TO THE NETWORK CONNECTION",
+        "BUFFER TO STORE RECEIVED DATA",
+        "LENGTH OF THE BUFFER"   
+    ] },
+    { label: 'NET_CLOSE', parameters: ['POINTER NETH'], return_type: 'INT',parameterDetails: [
+        "POINTER TO NETWORK CLOSE"
+    ] },
+    { label: 'NET_GETAVAILABLEBYTES', parameters: ['POINTER NETH'], return_type: 'INT',parameterDetails: [
+        "POINTER NETWORK CONNECTION"
+    ] },
+    { label: 'NET_GETRECEIVEBUFFERSIZE', parameters: ['POINTER NETH'], return_type: 'INT',parameterDetails: [
+        "POINTER NETWORK CONNECTION"
+    ] },
+    { label: 'NET_GETREMOTEADDR', parameters: ['POINTER NETH'], return_type: 'STRING',parameterDetails: [
+        "POINTER NETWORK CONNECTION"
+    ] },
+    { label: 'NET_IS_NEW_CONNECTION', parameters: ['POINTER NETH'], return_type: 'INT', parameterDetails: [
+        "POINTER NETWORK CONNECTION"
+    ] },
+    { label: 'NET_IS_MESSAGE_INCOMING', parameters: ['POINTER EVENT'], return_type: 'INT',parameterDetails: [
+        "POINTER TO NETWORK EVENT"
+    ] },
 ];
 
 function provideCompletionAndSignatureHelp(document, position, token, context) {
