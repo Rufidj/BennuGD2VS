@@ -116,35 +116,96 @@ const functions = [
         "VALUE NUMBER",
         "VALUE NUMBER"
     ] },
-    { label: 'SGN', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'SGN', parameters: ['INT'], return_type: 'INT' },
-    { label: 'ROUND', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'FLOOR', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'CEIL', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'TRUNC', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'FRAC', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'DECIMAL', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'RAD', parameters: ['INT'], return_type: 'DOUBLE' },
-    { label: 'DEG', parameters: ['DOUBLE'], return_type: 'INT' },
-    { label: 'ABS', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'EXP', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'LOG', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'LOG10', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'POW', parameters: ['DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'SQRT', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'FMOD', parameters: ['DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'MMOD', parameters: ['DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'MODULUS', parameters: ['DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'COS', parameters: ['INT'], return_type: 'DOUBLE' },
-    { label: 'SIN', parameters: ['INT'], return_type: 'DOUBLE' },
-    { label: 'TAN', parameters: ['INT'], return_type: 'DOUBLE' },
-    { label: 'ACOS', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'ASIN', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'ATAN', parameters: ['DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'ATAN2', parameters: ['DOUBLE', 'DOUBLE'], return_type: 'DOUBLE' },
-    { label: 'ISINF', parameters: ['DOUBLE'], return_type: 'INT' },
-    { label: 'ISNAN', parameters: ['DOUBLE'], return_type: 'INT' },
-    { label: 'FINITE', parameters: ['DOUBLE'], return_type: 'INT' },
+    { label: 'SGN', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER SIGN (DECIMAL)"
+    ] },
+    { label: 'SGN', parameters: ['INT NUMBER'], return_type: 'INT',parameterDetails: [
+        "NUMBER SIGN (INTEGER)"
+    ] },
+    { label: 'ROUND', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER ROUND"
+    ] },
+    { label: 'FLOOR', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER ROUND"
+    ] },
+    { label: 'CEIL', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER ROUND"
+    ] },
+    { label: 'TRUNC', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO REMOVE DECIMALS"
+    ] },
+    { label: 'FRAC', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO ADD DECIMALS"
+    ] },
+    { label: 'DECIMAL', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE' },
+    { label: 'RAD', parameters: ['INT NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "DEGREES"
+    ] },
+    { label: 'DEG', parameters: ['DOUBLE NUMBER'], return_type: 'INT',parameterDetails: [
+        "RADIANS"
+    ] },
+    { label: 'ABS', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "ABSOLUTE NUMBER"
+    ] },
+    { label: 'EXP', parameters: ['DOUBLE EXPONENT'], return_type: 'DOUBLE',parameterDetails: [
+        "EXPONENT NUMBER"
+    ] },
+    { label: 'LOG', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "LOGARITHM NUMBER"
+    ] },
+    { label: 'LOG10', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "LOGARITHM NUMBER BASE 10"
+    ] },
+    { label: 'POW', parameters: ['DOUBLE NUMBE', 'DOUBLE EXPONENT'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO CALCULATE POWER",
+        "EXPONENT NUMBER"
+    ] },
+    { label: 'SQRT', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO CALCULATE SQUARE RAID"
+    ] },
+    { label: 'FMOD', parameters: ['DOUBLE DIVIDEND', 'DOUBLE DIVIDER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER OF DIVIDEND",
+        "NUMBER OF DIVIDER"
+    ] },
+    { label: 'MMOD', parameters: ['DOUBLE DIVIDEND', 'DOUBLE DIVIDER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER OF DIVIDEND",
+        "NUMBER OF DIVIDER"
+    ] },
+    { label: 'MODULUS', parameters: ['DOUBLE X', 'DOUBLE Y'], return_type: 'DOUBLE',parameterDetails: [
+        "X MAGNITUDE",
+        "Y MAGNITUDE"
+    ] },
+    { label: 'COS', parameters: ['INT NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER FOR CONSENO"
+    ] },
+    { label: 'SIN', parameters: ['INT NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER FOR SENO"
+    ] },
+    { label: 'TAN', parameters: ['INT NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER FOR TANGENT"
+    ] },
+    { label: 'ACOS', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO CALCULATE ARC COSENO"
+    ] },
+    { label: 'ASIN', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO CALCULATE ARC SENO"
+    ] },
+    { label: 'ATAN', parameters: ['DOUBLE NUMBER'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO CALCULATE ARC TANGENT"
+    ] },
+    { label: 'ATAN2', parameters: ['DOUBLE NUMBER1', 'DOUBLE NUMBER2'], return_type: 'DOUBLE',parameterDetails: [
+        "NUMBER TO CALCULATE ARC TANGENT",
+        "NUMBER TO CALCULATE ARC TANGENT"
+    ] },
+    { label: 'ISINF', parameters: ['DOUBLE NUMBER'], return_type: 'INT',parameterDetails: [
+        "NUMBER TO CHECK IF THE VALUE IS INFINITE"
+    ] },
+    { label: 'ISNAN', parameters: ['DOUBLE NUMBER'], return_type: 'INT',parameterDetails: [
+        " TO CHECK IF THE VALUE IS UNDEFINED"
+    ] },
+    { label: 'FINITE', parameters: ['DOUBLE NUMBER'], return_type: 'INT',parameterDetails: [
+        " TO CHECK IF THE VALUE IS FINITE"
+    ] },
     { label: 'INTERSECT', parameters: ['DOUBLE X1', 'DOUBLE Y1', 'DOUBLE X2', 'DOUBLE Y2', 'DOUBLE X3', 'DOUBLE Y3', 'DOUBLE X4', 'DOUBLE Y4', 'POINTER', 'POINTER'], return_type: 'INT', parameterDetails: [
         "POSITION X1",
         "POSITION Y1",
@@ -862,36 +923,82 @@ const functions = [
     { label: 'SOUND_GROUP_HALT', parameters: ['INT'], return_type: 'INT' },
     { label: 'SOUND_GROUP_FADE_OUT', parameters: ['INT', 'INT'], return_type: 'INT' },
     { label: 'TRACE', parameters: ['INT'], return_type: 'INT' },
-    { label: 'KEY', parameters: ['INT'], return_type: 'INT' },
-    { label: 'KEYUP', parameters: ['INT'], return_type: 'INT' },
-    { label: 'KEY_UP', parameters: ['INT'], return_type: 'INT' },
-    { label: 'KEYDOWN', parameters: ['INT'], return_type: 'INT' },
-    { label: 'KEY_DOWN', parameters: ['INT'], return_type: 'INT' },
+    { label: 'KEY', parameters: ['INT KEY'], return_type: 'INT',parameterDetails: [
+        "KEY OF KEYBOARD"
+    ] },
+    { label: 'KEYUP', parameters: ['INT KEY'], return_type: 'INT',parameterDetails: [
+        "KEY RELEASED"
+    ] },
+    { label: 'KEY_UP', parameters: ['INT KEY'], return_type: 'INT',parameterDetails: [
+        "KEY UP PRESSED"
+    ] },
+    { label: 'KEYDOWN', parameters: ['INT KEY'], return_type: 'INT',parameterDetails: [
+        "KEY PRESSED"
+    ] },
+    { label: 'KEY_DOWN', parameters: ['INT KEY'], return_type: 'INT',parameterDetails: [
+        "KEY DOWN PRESSED"
+    ] },
     { label: 'JOY_NAME', parameters: [], return_type: 'STRING' },
-    { label: 'JOY_NAME', parameters: ['INT'], return_type: 'STRING' },
-    { label: 'JOY_SELECT', parameters: ['INT'], return_type: 'INT' },
+    { label: 'JOY_NAME', parameters: ['INT JOY'], return_type: 'STRING',parameterDetails: [
+        "ID JOY NAME"
+    ] },
+    { label: 'JOY_SELECT', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "ID JOY SELECTED"
+    ] },
     { label: 'JOY_NUMBER', parameters: [], return_type: 'INT' },
     { label: 'JOY_NUMJOYSTICKS', parameters: [], return_type: 'INT' },
     { label: 'JOY_BUTTONS', parameters: [], return_type: 'INT' },
-    { label: 'JOY_BUTTONS', parameters: ['INT'], return_type: 'INT' },
+    { label: 'JOY_BUTTONS', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "ID NUM BUTTONS"
+    ] },
     { label: 'JOY_NUMBUTTONS', parameters: [], return_type: 'INT' },
-    { label: 'JOY_NUMBUTTONS', parameters: ['INT'], return_type: 'INT' },
+    { label: 'JOY_NUMBUTTONS', parameters: ['INT NUMBUTTONS'], return_type: 'INT',parameterDetails: [
+        "MAX JOY BUTTONS"
+    ] },
     { label: 'JOY_AXES', parameters: [], return_type: 'INT' },
-    { label: 'JOY_AXES', parameters: ['INT'], return_type: 'INT' },
+    { label: 'JOY_AXES', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "MAX JOY AXES"
+    ] },
     { label: 'JOY_NUMAXES', parameters: [], return_type: 'INT' },
-    { label: 'JOY_NUMAXES', parameters: ['INT'], return_type: 'INT' },
+    { label: 'JOY_NUMAXES', parameters: ['INT NUMAXES'], return_type: 'INT',parameterDetails: [
+        "MAX NUM AXES"
+    ] },
     { label: 'JOY_NUMHATS', parameters: [], return_type: 'INT' },
-    { label: 'JOY_NUMHATS', parameters: ['INT'], return_type: 'INT' },
+    { label: 'JOY_NUMHATS', parameters: ['INT NUMHATS'], return_type: 'INT',parameterDetails: [
+        "MAX NUM HATS"
+    ] },
     { label: 'JOY_NUMBALLS', parameters: [], return_type: 'INT' },
-    { label: 'JOY_NUMBALLS', parameters: ['INT'], return_type: 'INT' },
-    { label: 'JOY_GETAXIS', parameters: ['INT'], return_type: 'INT' },
-    { label: 'JOY_GETAXIS', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'JOY_GETPOSITION', parameters: ['INT'], return_type: 'INT' },
-    { label: 'JOY_GETPOSITION', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'JOY_GETBUTTON', parameters: ['INT'], return_type: 'INT' },
-    { label: 'JOY_GETBUTTON', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'JOY_GETHAT', parameters: ['INT'], return_type: 'INT' },
-    { label: 'JOY_GETHAT', parameters: ['INT', 'INT'], return_type: 'INT' },
+    { label: 'JOY_NUMBALLS', parameters: ['INT NUMBALLS'], return_type: 'INT',parameterDetails: [
+        "MAX NUM BALLS"
+    ] },
+    { label: 'JOY_GETAXIS', parameters: ['INT ID'], return_type: 'INT',parameterDetails: [
+        "ID JOY"
+    ] },
+    { label: 'JOY_GETAXIS', parameters: ['INT ID', 'INT VALUE'], return_type: 'INT',parameterDetails: [
+        "ID JOY",
+        "VALUE AXIS"
+    ] },
+    { label: 'JOY_GETPOSITION', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "ID JOY"
+    ] },
+    { label: 'JOY_GETPOSITION', parameters: ['INT JOY', 'INT VALUE'], return_type: 'INT',parameterDetails: [
+        "ID JOY",
+        "ARRAY POSITIONS"
+    ] },
+    { label: 'JOY_GETBUTTON', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "ID JOY"
+    ] },
+    { label: 'JOY_GETBUTTON', parameters: ['INT JOY', 'INT VALUE'], return_type: 'INT',parameterDetails: [
+        "ID JOY",
+        "ARRAY BUTTONS"
+    ] },
+    { label: 'JOY_GETHAT', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "ID JOY"
+    ] },
+    { label: 'JOY_GETHAT', parameters: ['INT JOY', 'INT VALUE'], return_type: 'INT',parameterDetails: [
+        "ID JOY",
+        "ARRAY HATS"
+    ] },
     { label: 'JOY_GETBALL', parameters: ['INT', 'POINTER', 'POINTER'], return_type: 'INT' },
     { label: 'JOY_GETBALL', parameters: ['INT', 'INT', 'POINTER', 'POINTER'], return_type: 'INT' },
     { label: 'JOY_GETACCEL', parameters: ['POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
