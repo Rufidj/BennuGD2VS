@@ -704,15 +704,66 @@ const functions = [
         "GRAPH NUMBER",
         "TYPE INFO"
     ] },
-    { label: 'GRAPHIC_SET', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'GRAPHIC_INFO', parameters: ['INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'POINT_GET', parameters: ['INT', 'INT', 'INT', 'POINTER', 'POINTER'], return_type: 'INT' },
-    { label: 'POINT_SET', parameters: ['INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'CENTER_SET', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
+    { label: 'GRAPHIC_SET', parameters: ['INT FILE', 'INT GRAPH', 'INT TYPE', 'INT VALUE'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "TYPE OF FEATURE",
+        "NEW VALUE"
+    ] },
+    { label: 'GRAPHIC_INFO', parameters: ['INT FILE', 'INT GRAPH', 'INT INFO'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "GET INFO"
+    ] },
+    { label: 'POINT_GET', parameters: ['INT FILE', 'INT GRAPH', 'INT NUMBER', 'POINTER DX', 'POINTER DY'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "NUMBER CPOINT",
+        "POSITION X",
+        "POSITION Y"
+    ] },
+    { label: 'POINT_SET', parameters: ['INT FILE', 'INT GRAPH', 'INT NUMBER', 'INT DX', 'INT DY'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "NUMBER CPOINT",
+        "POSITION X",
+        "POSITION Y"
+    ] },
+    { label: 'CENTER_SET', parameters: ['INT FILE', 'INT GRAPH', 'INT X', 'INT Y'], return_type: 'INT',parameterDetails:[
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "POSITION X",
+        "POSITION Y"
+    ] },
     { label: 'POINT_GET_TOTAL', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'BOX_SET', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'BOX_SET', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'BOX_GET', parameters: ['INT', 'INT', 'INT', 'POINTER', 'POINTER', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
+    { label: 'BOX_SET', parameters: ['INT FILE', 'INT GRAPH', 'INT BOX_ID', 'INT SHAPE_TYPE', 'INT CX', 'INT CY', 'INT WIDTH', 'INT HEIGHT'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "BOX ID",
+        "SHAPE TYPE",
+        "CX",
+        "CY",
+        "WIDTH",
+        "HEIGHT"
+    ] },
+    { label: 'BOX_SET', parameters: ['INT FILE', 'INT GRAPH', 'INT BOX_ID', 'INT SHAPE_TYPE', 'INT CX', 'INT CY'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "BOX ID",
+        "SHAPE TYPE",
+        "CX",
+        "CY",
+    ] },
+    { label: 'BOX_GET', parameters: ['INT FILE', 'INT GRAPH', 'INT BOX_ID', 'POINTER SHAPE', 'POINTER CX', 'POINTER CY', 'POINTER WIDTH', 'POINTER HEIGHT'], return_type: 'INT',parameterDetails: [
+        "ID GRAPH LIBRARY",
+        "GRAPH",
+        "BOX ID",
+        "SHAPE TYPE",
+        "CX",
+        "CY",
+        "WIDTH",
+        "HEIGHT"
+    ] },
     { label: 'BOX_GET', parameters: ['INT', 'POINTER', 'POINTER', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
     { label: 'BOX_GET_BY_POS', parameters: ['INT', 'INT', 'INT', 'POINTER', 'POINTER', 'POINTER', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
     { label: 'BOX_GET_BY_POS', parameters: ['INT', 'POINTER', 'POINTER', 'POINTER', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
@@ -731,11 +782,23 @@ const functions = [
     { label: 'FNT_NEW', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'STRING', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'FNT_NEW', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
     { label: 'FNT_NEW', parameters: ['INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'INT', 'STRING', 'INT', 'INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
-    { label: 'FNT_LOAD', parameters: ['STRING'], return_type: 'INT' },
-    { label: 'FNT_LOAD', parameters: ['STRING', 'POINTER'], return_type: 'INT' },
-    { label: 'FNT_UNLOAD', parameters: ['INT'], return_type: 'INT' },
-    { label: 'GLYPH_GET', parameters: ['INT', 'INT'], return_type: 'INT' },
-    { label: 'GLYPH_SET', parameters: ['INT', 'INT', 'INT', 'INT'], return_type: 'INT' },
+    { label: 'FNT_LOAD', parameters: ['STRING FILE'], return_type: 'INT',parameterDetails: [
+        "FONT FILE"
+    ] },
+    { label: 'FNT_LOAD', parameters: ['STRING FILE', 'POINTER'], return_type: 'INT' },
+    { label: 'FNT_UNLOAD', parameters: ['INT ID'], return_type: 'INT',parameterDetails: [
+        "ID FONT FILE"
+    ] },
+    { label: 'GLYPH_GET', parameters: ['INT FILE', 'INT GLYPH'], return_type: 'INT',parameterDetails: [
+        "FONT FILE",
+        "GLYPH"
+    ] },
+    { label: 'GLYPH_SET', parameters: ['INT FILE', 'INT GLYPH', 'INT LIBRARY', 'INT GRAPH'], return_type: 'INT',parameterDetails: [
+        "FONT FILE",
+        "GLYPH",
+        "LIBRARY GRAPH",
+        "GRAPH"
+    ] },
     { label: 'DRAWING_COLOR', parameters: ['INT'], return_type: 'INT' },
     { label: 'DRAWING_COLOR', parameters: ['INT', 'INT'], return_type: 'INT' },
     { label: 'DRAWING_RGBA', parameters: ['BYTE', 'BYTE', 'BYTE', 'BYTE'], return_type: 'INT' },
@@ -999,12 +1062,32 @@ const functions = [
         "ID JOY",
         "ARRAY HATS"
     ] },
-    { label: 'JOY_GETBALL', parameters: ['INT', 'POINTER', 'POINTER'], return_type: 'INT' },
-    { label: 'JOY_GETBALL', parameters: ['INT', 'INT', 'POINTER', 'POINTER'], return_type: 'INT' },
-    { label: 'JOY_GETACCEL', parameters: ['POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
-    { label: 'JOY_GETACCEL', parameters: ['INT', 'POINTER', 'POINTER', 'POINTER'], return_type: 'INT' },
+    { label: 'JOY_GETBALL', parameters: ['INT JOY', 'POINTER DX', 'POINTER DY'], return_type: 'INT',parameterDetails :[
+        "ID JOY",
+        "POSITION X",
+        "POSITION Y"
+    ] },
+    { label: 'JOY_GETBALL', parameters: ['INT JOY', 'INT BALL', 'POINTER DX', 'POINTER DY'], return_type: 'INT',parameterDetails: [
+        "ID JOY",
+        "ID BALL",
+        "POSITION X",
+        "POSITION Y"
+    ] },
+    { label: 'JOY_GETACCEL', parameters: ['POINTER AX', 'POINTER AY', 'POINTER AZ'], return_type: 'INT',parameterDetails: [
+        "ACCEL X",
+        "ACCEL Y",
+        "ACCEL Z"
+    ] },
+    { label: 'JOY_GETACCEL', parameters: ['INT JOY', 'POINTER AX', 'POINTER AY', 'POINTER AZ'], return_type: 'INT',parameterDetails: [
+        "ID JOY",
+        "ACCEL X",
+        "ACCEL Y",
+        "ACCEL Z"
+    ] },
     { label: 'JOY_IS_ATTACHED', parameters: [], return_type: 'INT' },
-    { label: 'JOY_IS_ATTACHED', parameters: ['INT'], return_type: 'INT' },
+    { label: 'JOY_IS_ATTACHED', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
+        "ID JOY"
+    ] },
     { label: 'JOY_QUERY', parameters: ['INT JOY'], return_type: 'INT',parameterDetails: [
         "JOY SELECTED"
     ] },
